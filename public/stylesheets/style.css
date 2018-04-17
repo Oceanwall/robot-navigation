@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700');
+
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+} */
+
+/* questionable CSS */
+#eventsTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 5vw;
+
+  margin-bottom: 40px;
+}
+.eventTitle {
+  font-family: 'Montserrat', sans-serif;
+}
+.eventDesc {
+  font-family: 'Merriweather', serif;
+}
+.eventButton {
+  display: relative;
+  width: 60%;
+  height: 20%;
+
+  margin-left: 20%;
+  margin-bottom: 20px;
+
+  background: #a0a2ff;
+  cursor: pointer;
+
+  border: #041e47 3px solid;
+  border-radius: 3px;
+}
+.eventButton:hover {
+  animation: changeColor .25s forwards, expandSize .25s forwards;
+}
+@keyframes changeColor {
+  from {background: #a0a2ff;}
+  to {background: #6667d1;}
+}
+@keyframes expandSize {
+  from {margin-left: 20%;}
+  to {margin-left: 21%;}
+}
