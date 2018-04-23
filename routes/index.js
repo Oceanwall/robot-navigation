@@ -17,11 +17,13 @@ router.get('/', function(req, res, next) {
   getEvents(options).then((result) => {
     let resultsObject = {results: result};
     res.render('index', resultsObject );
-  })
-  // res.render('index', { title: 'Express' });
+  });
 });
 
 module.exports = router;
+
+//todo: alter script so that it scrapes dates from the first page? currently getting inaccurate
+//dates from unupdated landing pages of events.
 
 //main function
 function getEvents(options) {
@@ -31,12 +33,19 @@ function getEvents(options) {
     rp(options).then(($) => {
 
       let urlTargets = [];
+      //landing pages aren't updated and provide inaccurate information; this fixes that problem.
+      let updatedDates = [];
       let promiseArray = [];
 
       //gets url links from the main page (each url links to an event page, which is further scraped)
       $(".views-field-title").each((index, elem) => {
         let rawText = $(elem).html();
         urlTargets[index] = elemExtractor(rawText);
+      });
+
+      $(".views-field-created").each((index, elem) => {
+        let rawText = $(elem).html();
+        updatedDates[index] = dateExtractor(rawText);
       });
 
       //given the urls, creates an array of options to use with request-promise
@@ -78,10 +87,12 @@ function getEvents(options) {
 
             currentObject.description = currentDescription;
 
-            //slightly redundant since currentObject.data provides start and end times LOL
-            currentObject.date = $2(".date-display-single").text();
-            currentObject.start = $2(".date-display-start").text();
-            currentObject.end = $2(".date-display-end").text();
+            //doesnt work because landing page dates are not updated, must scrape from main page
+            // //slightly redundant since currentObject.date provides start and end times LOL
+            // currentObject.date = $2(".date-display-single").text();
+            // currentObject.start = $2(".date-display-start").text();
+            // currentObject.end = $2(".date-display-end").text();
+            currentObject.date = updatedDates[i];
 
             //this code accounts for if the location is not found. If this is so,
             //then the event is nonstandard (for instance, online only), and should
@@ -133,6 +144,17 @@ function elemExtractor(rawText) {
   let hrefStart = rawText.indexOf("https");
   let hrefEnd = rawText.indexOf('"', hrefStart);
   return rawText.substring(hrefStart, hrefEnd);
+}
+
+//gets correct dates from cs.utexas.edu/events landing page
+function dateExtractor(rawText) {
+  let start = rawText.indexOf('>');
+  let middle = rawText.indexOf('-', start);
+  let end = rawText.indexOf('</span>');
+
+  //adjusts appearance of date string to Dayname, Month Day, Year. Start time: TIME
+  let dateString = `${rawText.substring(start + 1, middle - 1)}. Start Time: ${rawText.substring(middle + 2, end)}`;
+  return dateString;
 }
 
 //creates options for use in request-promise

@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700');
 
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-} */
-
 /* questionable CSS */
 #eventsTitle {
   font-family: 'Montserrat', sans-serif;
@@ -30,22 +21,33 @@ a {
   height: 20%;
 
   margin-left: 20%;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 
   background: #a0a2ff;
   cursor: pointer;
 
   border: #041e47 3px solid;
   border-radius: 3px;
+
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
 }
 .eventButton:hover {
   animation: changeColor .25s forwards, expandSize .25s forwards;
+  -webkit-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
 }
 @keyframes changeColor {
   from {background: #a0a2ff;}
   to {background: #6667d1;}
 }
-@keyframes expandSize {
+/* @keyframes expandSize {
   from {margin-left: 20%;}
   to {margin-left: 21%;}
-}
+} */

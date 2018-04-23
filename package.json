@@ -15,6 +15,7 @@
     "morgan": "~1.9.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
+    "roslib": "^0.20.0",
     "serve-favicon": "~2.4.5"
   }
 }
