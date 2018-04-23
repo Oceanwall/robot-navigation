@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -26,10 +27,43 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+/*
 //presume that the rosbridge server is on localhost, default port 9090
-// var ros = new ROSLIB.Ros({
-//   url: 'ws://localhost:9090'
-// });
+var ros = new ROSLIB.Ros({
+  url: 'ws://localhost:9090'
+});
+
+ros.on('connection', function() {
+ console.log('Connected to websocket server.');
+});
+
+ros.on('error', function(error) {
+ console.log('Error connecting to websocket server: ', error);
+});
+
+ros.on('close', function() {
+ console.log('Connection to websocket server closed.');
+});
+
+//topic publishing
+//create the topic
+var roomNumber = new ROSLIB.Topic({
+	ros: ros,
+	name: '/roomNumber',
+	messageType: 'std_msgs/String',
+});
+
+app.post('/sendRoomNumber', function(req, res) {
+	let keys = Object.keys(req.body);
+	let number = keys[0];
+	console.log(number);
+	let message = new ROSLIB.Message({
+		data: number,
+	});
+	roomNumber.publish(message);
+	res.status(200).send("success");
+});
+*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

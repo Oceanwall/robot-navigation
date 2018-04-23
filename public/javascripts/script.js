@@ -5,13 +5,13 @@ window.onload = function() {
 
   //adds event listeners to each of the buttons
   for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", getEventRoom);
+    buttons[i].addEventListener("click", sendEventRoom);
   }
 }
 
 //currently logs out the room number, but can be easily altered to call another
 //method to broadcast the room number as necessary
-function getEventRoom(event) {
+function sendEventRoom(event) {
   let buttonOfInterest = event.currentTarget;
   let buttonProps = buttonOfInterest.childNodes;
   let roomText;
@@ -23,7 +23,16 @@ function getEventRoom(event) {
       k = buttonProps.length;
     }
   }
+  //roomText holds the room number of interest
 
-  console.log(roomText);
-  alert(roomText);
+
+  //request made to broadcast room number
+  fetch('http://localhost:3000/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: roomText}).then((response) => {
+    if (response == "success") {
+      console.log("Room number successfully sent");
+    }
+    else {
+      console.log("Room number failed to send. An error occurred");
+    }
+  });
 }

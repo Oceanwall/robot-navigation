@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
