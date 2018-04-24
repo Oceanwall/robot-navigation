@@ -29,11 +29,13 @@ function sendEventRoom(event) {
 
 
   //request made to broadcast room number
+  //IT STILL DOESNT WORK VIA PHONE AHHH I DONT KNOW WHY
   fetch('http://localhost:3000/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: roomText}).then((response) => {
-    if (response == "success") {
+    if (response.status == 200) {
       console.log("Room number successfully sent");
     }
     else {
+      console.log(response);
       console.log("Room number failed to send. An error occurred");
     }
   });
