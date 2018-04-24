@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700|Source+Sans+Pro');
 
 /* questionable CSS */
 #eventsTitle {
@@ -47,7 +47,14 @@
   from {background: #a0a2ff;}
   to {background: #6667d1;}
 }
-/* @keyframes expandSize {
-  from {margin-left: 20%;}
-  to {margin-left: 21%;}
-} */
+.infoText {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 2em;
+}
+.centerMiddle {
+  display: relative;
+  width: 60%;
+  margin-left: 20%;
+  text-align: center;
+}

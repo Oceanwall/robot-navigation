@@ -19,10 +19,12 @@ function sendEventRoom(event) {
   //gets the room number
   for (let k = 0; k < buttonProps.length; k++) {
     if (buttonProps[k].id === "roomNumber") {
-      roomText = buttonProps[k].innerHTML;
+      roomText = buttonProps[k].innerHTML.slice(1, -1);
       k = buttonProps.length;
     }
   }
+
+  alert(roomText);
   //roomText holds the room number of interest
 
 

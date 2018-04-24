@@ -17,5 +17,17 @@
     "request-promise": "^4.2.2",
     "roslib": "^0.20.0",
     "serve-favicon": "~2.4.5"
-  }
+  },
+  "description": "Using Web Data to Provide Robot Navigation for GDC Event Attendees",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avinashdamania/robot-navigation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avinashdamania/robot-navigation/issues"
+  },
+  "homepage": "https://github.com/avinashdamania/robot-navigation#readme"
 }
