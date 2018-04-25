@@ -14,6 +14,7 @@ window.onload = function() {
 function sendEventRoom(event) {
   let buttonOfInterest = event.currentTarget;
   let buttonProps = buttonOfInterest.childNodes;
+  //roomText holds the room number of interest
   let roomText;
 
   //gets the room number
@@ -24,15 +25,13 @@ function sendEventRoom(event) {
     }
   }
 
-  alert(roomText);
-  //roomText holds the room number of interest
-
 
   //request made to broadcast room number
-  //IT STILL DOESNT WORK VIA PHONE AHHH I DONT KNOW WHY
-  fetch('http://localhost:3000/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: roomText}).then((response) => {
+  //IT WORKS WOOOOOOOOOO only on computer but that is sufficient!!!!!!!
+  fetch('http://10.148.183.240:3000/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: roomText}).then((response) => {
     if (response.status == 200) {
       console.log("Room number successfully sent");
+      alert(roomText);
     }
     else {
       console.log(response);
