@@ -12,11 +12,12 @@
         This service allows you to request a robot navigator to your current location. The robot can be used for guidance to an event happening in the GDC.
       </h3>
 
-      <form id="submitLocation" onsubmit="processRequest(event)">
-        <input type="text" placeholder="9.999" maxlength="6" id="roomNumberSubmission"></input>
+      <form id="submitLocation" onsubmit="processRequest(event)" autocomplete="off">
+        <input type="text" placeholder="9.999" maxlength="6" id="roomNumberSubmission" required oninput="changedInput()"></input>
         <button type="submit" className="submit">
           SUBMIT
         </button>
+        <div id="errorText">Invalid room number. Try again!</div>
       </form>
 
       <h3 class="infoText">

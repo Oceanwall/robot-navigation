@@ -59,25 +59,29 @@ var roomNumber = new ROSLIB.Topic({
 	name: '/roomNumber',
 	messageType: 'std_msgs/String',
 });
-
-app.post('/sendRoomNumber', function(req, res) {
-	let keys = Object.keys(req.body);
-	let number = keys[0];
-	console.log(number);
-	let message = new ROSLIB.Message({
-		data: number,
-	});
-	roomNumber.publish(message);
-	res.status(200).send("success");
-});
 */
 
-
-//testing post request code here:
+//get room number of event to navigate to
 app.post('/sendRoomNumber', function(req, res) {
 	let keys = Object.keys(req.body);
 	let number = keys[0];
 	console.log(number);
+	// let message = new ROSLIB.Message({
+	// 	data: number,
+	// });
+	// roomNumber.publish(message);
+	res.status(200).send("success");
+});
+
+//get room number of user to navigate to
+app.post('/userCurrentLocation', function(req, res) {
+	let keys = Object.keys(req.body);
+	let number = keys[0];
+	console.log(number);
+	// let message = new ROSLIB.Message({
+	// 	data: number,
+	// });
+	// roomNumber.publish(message);
 	res.status(200).send("success");
 });
 
