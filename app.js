@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/eventSelector', index);
 app.use('/', requestRobot);
 
+
 /*
 //presume that the rosbridge server is on localhost, default port 9090
 var ros = new ROSLIB.Ros({

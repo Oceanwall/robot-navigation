@@ -16,22 +16,22 @@ function processRequest(event) {
   let roomIndex = ROOM_LIST.indexOf(formattedNumber);
   if (roomIndex === -1) {
     validInput = false;
-    document.getElementById("roomNumberSubmission").classList.add('invalid');
+    document.getElementById("roomNumberSubmission").style.border = "1.5px red dotted";
     document.getElementById("errorText").style.visibility = "visible";
   }
   else {
     fetch('http://10.148.183.240:3000/userCurrentLocation', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: formattedNumber}).then((response) => {
       if (response.status == 200) {
         console.log("Room number of user's current location successfully sent");
+        //create alert of some type here to let user know that it was succesfully sent
+        //make sure that input is not longer editable
+        //after robot arrives, automatically redirect (?) on app.js
       }
       else {
         console.log(response);
         console.log("Room number of user's current location failed to send. An error occurred");
       }
     });
-    //maybe redirect user? hmm
-    //or give indication that it was successful?
-    //or maybe redirect to guiding page once robot indicates that it has successfully reached its destination?
   }
 
   //reset input box
@@ -42,7 +42,7 @@ function processRequest(event) {
 function changedInput() {
   if (!validInput) {
     validInput = true;
-    document.getElementById("roomNumberSubmission").classList.remove('invalid');
+    document.getElementById("roomNumberSubmission").style.border = "1.5px black dotted";
     document.getElementById("errorText").style.visibility = "hidden";
   }
 }

@@ -1,8 +1,13 @@
 # robot-navigation
 Using Web Data to Provide Robot Navigation for GDC Event Attendees
 
-Current status: Basic visual interface complete.
+Current status:
+* Visual interface complete.
+* Basic routing is complete.
+
 
 TODO:
-Set up request navigator assistance, make page switches, etc:
-Prevent others from calling robot when robot is currently in use?
+* Prevent others from calling robot when robot is currently in use?
+* Create alert of some type here to let user know that a request was successfully sent (on both pages?)
+* ^Make sure that input is not longer editable
+* After robot arrives, automatically redirect (?) on app.js

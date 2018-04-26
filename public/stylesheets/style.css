@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700|Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700|Source+Sans+Pro|Alegreya+Sans');
 
 /* questionable CSS */
 #eventsTitle {
@@ -58,6 +58,48 @@
   margin-left: 20%;
   text-align: center;
 }
+#roomNumberSubmission {
+  width: 40vw;
+  height: 10vh;
+  text-align: center;
+  border: 1px dotted black;
+
+  font-size: 10vh;
+  font-family: 'Alegreya Sans', sans-serif;
+}
+#submit {
+  margin-top: 5vh;
+  width: 20vw;
+  height: 6vh;
+
+  border: 1.5px solid black;
+  border-radius: 3px;
+
+  background-color: white;
+
+  font-size: 2vw;
+  font-family: 'Montserrat', sans-serif;
+
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#submit:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+}
 #errorText {
+  margin-top: 3vh;
+
+  font-size: 2vw;
+  font-family: 'Alegreya Sans', sans-serif;
+
+  color: red;
   visibility: hidden;
 }
