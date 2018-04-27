@@ -34,9 +34,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/eventSelector', index);
 app.use('/', requestRobot);
 
+//TODO: create ros subscriber node for feedback to user?
 
 /*
 //presume that the rosbridge server is on localhost, default port 9090
+//TODO: change localhost to IPv4 constant?
 var ros = new ROSLIB.Ros({
   url: 'ws://localhost:9090'
 });
@@ -75,6 +77,7 @@ app.post('/sendRoomNumber', function(req, res) {
 });
 
 //get room number of user to navigate to
+//TODO: different publishers? consider...
 app.post('/userCurrentLocation', function(req, res) {
 	let keys = Object.keys(req.body);
 	let number = keys[0];

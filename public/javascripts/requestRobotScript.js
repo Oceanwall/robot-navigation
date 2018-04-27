@@ -1,6 +1,3 @@
-//send the ROS subscriber the room number. The navigation ROS package is in charge
-//of determining which door to navigate to.
-
 /*  This JS script is in charge of allowing the user to enter the room number where
     they're currently located so that the robot can navigate to them (if the robot's not
     otherwise busy).
@@ -15,6 +12,7 @@ function processRequest(event) {
   let submittedNumber = document.getElementById('roomNumberSubmission').value.replace('.', '_');
   let doorCode = `d${submittedNumber}`;
   let longerDoorCode = `door(${doorCode})`;
+  //currently only sends user to first door found; in future, provide choice of doors?
   let doorIndex = DOOR_LIST.indexOf(longerDoorCode);
 
   if (doorIndex === -1) {
