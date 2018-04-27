@@ -1,4 +1,5 @@
-//shoddy DOM code below, be warned...
+const IP_V4 = "http://10.148.183.240:3000";
+
 window.onload = function() {
   let buttonContainer = document.getElementById("buttonContainer");
   let buttons = buttonContainer.childNodes;
@@ -29,7 +30,7 @@ function sendEventRoom(event) {
   //request made to broadcast room number
   //IT WORKS WOOOOOOOOOO only on computer but that is sufficient!!!!!!!
   //possible todo: trouble shoot safri?
-  fetch('http://10.148.183.240:3000/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: roomText}).then((response) => {
+  fetch(IP_V4 + '/userCurrentLocation', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: roomText}).then((response) => {
     if (response.status == 200) {
       console.log("Room number successfully sent");
       alert(roomText);

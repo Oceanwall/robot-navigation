@@ -13,8 +13,9 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '3000');
+//Requires different port here to avoid error where server believes that
+//something else is occupying this port.
+var port = normalizePort(process.env.PORT || '3002');
 app.set('port', port);
 
 // app.use(cors());
