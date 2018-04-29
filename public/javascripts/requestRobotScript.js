@@ -11,9 +11,8 @@ function processRequest(event) {
   event.preventDefault();
   let submittedNumber = document.getElementById('roomNumberSubmission').value.replace('.', '_');
   let doorCode = `d${submittedNumber}`;
-  let longerDoorCode = `door(${doorCode})`;
   //currently only sends user to first door found; in future, provide choice of doors?
-  let doorIndex = DOOR_LIST.indexOf(longerDoorCode);
+  let doorIndex = DOOR_LIST.indexOf(doorCode);
 
   if (doorIndex === -1) {
     validInput = false;
@@ -25,7 +24,7 @@ function processRequest(event) {
       if (response.status == 200) {
         console.log("Room number of user's current location successfully sent");
         document.getElementById("roomNumberSubmission").style.border = "1.5px green dotted";
-        //create alert of some type here to let user know that it was succesfully sent
+        alert("Request successfully sent! Robot is coming to you, please wait...")
         //make sure that input is not longer editable
         //after robot arrives, automatically redirect (?) on app.js
       }
@@ -50,4 +49,4 @@ function changedInput() {
 }
 
 //List of acceptable doors for BWI_KR navigation was obtained from https://github.com/utexas-bwi/bwi_common/blob/master/bwi_kr_execution/domain/navigation_facts.asp
-const DOOR_LIST = ["door(d3_404)", "door(d3_400)", "door(d3_508)", "door(d3_402)", "door(d3_500)", "door(d3_502)", "door(d3_430)", "door(d3_422)", "door(d3_420)", "door(d3_414a2)", "door(d3_414a3)", "door(d3_414a1)", "door(d3_416)", "door(d3_516)", "door(d3_418)", "door(d3_512)", "door(d3_510)", "door(d3_414b3)", "door(d3_414b2)", "door(d3_414b1)", "door(d3_432)", "door(d3_436)", "door(d3_824)", "door(d3_816a)", "door(d3_710b1)", "door(d3_710b2)", "door(d3_710b3)", "door(d3_710a1)", "door(d3_710a2)", "door(d3_710a3)", "door(d3_600)", "door(d3_303)"];
+const DOOR_LIST = ["d3_404", "d3_400", "d3_508", "d3_402", "d3_500", "d3_502", "d3_430", "d3_422", "d3_420", "d3_414a2", "d3_414a3", "d3_414a1", "d3_416", "d3_516", "d3_418", "d3_512", "d3_510", "d3_414b3", "d3_414b2", "d3_414b1", "d3_432", "d3_436", "d3_824", "d3_816a", "d3_710b1", "d3_710b2", "d3_710b3", "d3_710a1", "d3_710a2", "d3_710a3", "d3_600", "d3_303"];

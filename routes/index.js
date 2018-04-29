@@ -23,9 +23,6 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;
 
-//todo: alter script so that it scrapes dates from the first page? currently getting inaccurate
-//dates from unupdated landing pages of events.
-
 //main function
 function getEvents(options) {
 
@@ -55,7 +52,7 @@ function getEvents(options) {
       //goes through each of the url options and extracts relevant information in JSON format
       for (let i = 0; i < preparedOptions.length; i++) {
 
-        //will eventually create an array of promise (do i need promises here? hmm)
+        //will eventually create an array of promises
         let tempPromise = new Promise(function(resolve, reject) {
           rp(preparedOptions[i]).then(($2) => {
             let currentObject = {};
@@ -87,12 +84,6 @@ function getEvents(options) {
             }
 
             currentObject.description = currentDescription;
-
-            //doesnt work because landing page dates are not updated, must scrape from main page
-            // //slightly redundant since currentObject.date provides start and end times LOL
-            // currentObject.date = $2(".date-display-single").text();
-            // currentObject.start = $2(".date-display-start").text();
-            // currentObject.end = $2(".date-display-end").text();
             currentObject.date = updatedDates[i];
 
             //this code accounts for if the location is not found. If this is so,
@@ -130,6 +121,36 @@ function getEvents(options) {
         result = result.filter(function(item) {
           return item !== null; //return true if ok, false if should be removed
         });
+
+        //injection of 3rd floor events for demonstration happens here.
+        //relevant properties are title, description, date, room
+        //NOTE: Edit indices as necessary to make these fake events appear in order
+        //Also, feel free to edit dates and what not as well
+        let demoObject1 = {
+          title: "FRI Final Project Demo 1",
+          description: "A room to navigate to. How convenient!",
+          date: "Monday, May 7, 2018. Start time: 12:00 PM",
+          room: "GDC 3.512"
+        };
+
+        let demoObject2 = {
+          title: "FRI Final Project Demo 2",
+          description: "Lorem Ipsum, Lorem Ipsum, some really cool event about robots and FRI",
+          date: "Tuesday, May 8, 2018. Start time: 2:00 PM",
+          room: "GDC 3.404"
+        };
+
+        let demoObject3 = {
+          title: "FRI Final Project Demo 3",
+          description: "Demonstration of the best FRI spring semester project",
+          date: "Thursday, May 10, 2018. Start time: 2:00 PM",
+          room: "GDC 3.420"
+        };
+
+        result.splice(5, 0, demoObject1);
+        result.splice(11, 0, demoObject2);
+        result.splice(17, 0, demoObject3);
+
         resolve(result);
       });
 

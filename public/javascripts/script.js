@@ -37,28 +37,33 @@ function sendEventRoom(event) {
   }
 
   //Now that we know that the room number is on the third floor, we can determine available doors as necessary.
-  let processedRoomNumber = roomText.substring(roomText.indexOf('3.');
+  let processedRoomNumber = roomText.substring(roomText.indexOf('3.')).replace('.', '_');;
   //TODO: determine available door numbers, check to see if user cares;
   //if so, provde selection; otherwise, go straight onwards
   //for now, only provide 1 door (first door found);
-
+  let doorCode = `d${processedRoomNumber}`;
+  let doorIndex = DOOR_LIST.indexOf(doorCode);
+  //Error handling for invalid 3rd floor location, should never happen in demo
+  if (doorIndex == -1) {
+      alert("Sorry, but that room does not exist in our directory.");
+      return;
+  }
 
 
   //request made to broadcast room number
   //IT WORKS WOOOOOOOOOO only on computer but that is sufficient!!!!!!!
   //possible todo: trouble shoot safri?
-  fetch(IP_V4 + '/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: roomText}).then((response) => {
+  fetch(IP_V4 + '/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
     if (response.status == 200) {
-      console.log("Room number successfully sent");
-      alert(roomText);
+      console.log("(Door of) room of interest successfully sent");
+      //alert for now, but can be replaced in future with more cosmetically pleasing notification
+      alert("Successful transmission! Robot is now navigating.");
     }
     else {
       console.log(response);
-      console.log("Room number failed to send. An error occurred");
+      console.log("(Door of) room of interest failed to send. An error occurred");
     }
   });
 }
 
-function
-
-const DOOR_LIST = ["door(d3_404)", "door(d3_400)", "door(d3_508)", "door(d3_402)", "door(d3_500)", "door(d3_502)", "door(d3_430)", "door(d3_422)", "door(d3_420)", "door(d3_414a2)", "door(d3_414a3)", "door(d3_414a1)", "door(d3_416)", "door(d3_516)", "door(d3_418)", "door(d3_512)", "door(d3_510)", "door(d3_414b3)", "door(d3_414b2)", "door(d3_414b1)", "door(d3_432)", "door(d3_436)", "door(d3_824)", "door(d3_816a)", "door(d3_710b1)", "door(d3_710b2)", "door(d3_710b3)", "door(d3_710a1)", "door(d3_710a2)", "door(d3_710a3)", "door(d3_600)", "door(d3_303)"];
+const DOOR_LIST = ["d3_404", "d3_400", "d3_508", "d3_402", "d3_500", "d3_502", "d3_430", "d3_422", "d3_420", "d3_414a2", "d3_414a3", "d3_414a1", "d3_416", "d3_516", "d3_418", "d3_512", "d3_510", "d3_414b3", "d3_414b2", "d3_414b1", "d3_432", "d3_436", "d3_824", "d3_816a", "d3_710b1", "d3_710b2", "d3_710b3", "d3_710a1", "d3_710a2", "d3_710a3", "d3_600", "d3_303"];
