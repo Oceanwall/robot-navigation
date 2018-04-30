@@ -13,6 +13,7 @@ var requestRobot = require('./routes/requestRobot');
 var loadingScreen = require('./routes/loadingScreen');
 
 var app = express();
+var received = true;
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -100,6 +101,13 @@ app.post('/userCurrentLocation', function(req, res) {
 //Option 1) Periodically send fetch requests, change URL depending on response (alert as well!)
 //Option 2) Send one fetch request, use setinterval loop in here, respond when done!
 //Currently going with option 2
+
+app.post('/checkIfArrived', function(req, res) {
+  if (received) {
+    res.status(200).send("Success");
+  }
+  else res.status(418).send("Nope, still waiting");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

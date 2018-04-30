@@ -60,8 +60,6 @@ function sendRequest() {
       document.getElementById("roomNumberSubmission").value = "";
       console.log(doorCode);
       alert("Request successfully sent! Robot is coming to you, please wait...");
-      //make sure that input is not longer editable
-      //after robot arrives, automatically redirect (?) on app.js
       document.location.href = IP_V4 + "/loadingScreen";
     }
     else {

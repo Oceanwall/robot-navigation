@@ -85,9 +85,8 @@ function sendRequest() {
       console.log("(Door of) room of interest successfully sent");
       //alert for now, but can be replaced in future with more cosmetically pleasing notification
       alert("Successful transmission! Robot is now navigating.");
-      //Redirect user to waiting page? Robot is now navigating, please wait?
-      //considered css for a moment, but wouldn't work because no way to get feedback from subscriber
       //IDEA: get subscriber to re-render page when message is sent? so like send message on receival of command and another message upon success...
+      document.location.href = IP_V4 + "/loadingScreen";
     }
     else {
       console.log(response);
