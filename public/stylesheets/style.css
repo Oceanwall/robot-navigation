@@ -118,14 +118,6 @@ input:focus {
   visibility: hidden;
 }
 #chooseDoors {
-  position: fixed;
-  width: 40vw;
-  height: 20vh;
-
-  text-align: center;
-  margin-left: 29vw;
-  margin-top: 30vh;
-
   border: black 2px solid;
   border-radius: 20px;
 
@@ -133,6 +125,24 @@ input:focus {
   box-shadow: 1px 1.5px 1px 1.5px grey;
   z-index: 10;
   visibility: hidden;
+}
+.selectorLocation {
+  position: fixed;
+  width: 40vw;
+  height: 20vh;
+
+  text-align: center;
+  margin-left: 29vw;
+  margin-top: 30vh;
+}
+.requestLocation {
+  position: fixed;
+  width: 50vw;
+  height: 25vh;
+
+  text-align: center;
+  margin-left: 25vw;
+  margin-top: 35vh;
 }
 #doorSelect {
   margin-top: 10px;

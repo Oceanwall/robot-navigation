@@ -6,7 +6,6 @@ Current status:
 * Basic routing is complete.
 
 Current TODOs:
-* For requestRobot, provide choice of doors?
 * Update fake 3rd floor events as necessary (indices, dates, etc)
 * Subscriber to change views (loading or selection)
 

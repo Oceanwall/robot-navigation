@@ -6,6 +6,22 @@
     <script src="/javascripts/requestRobotScript.js" type="text/javascript"></script>
   </head>
   <body>
+    <div id="chooseDoors" class='requestLocation'>
+      <form id="doorForm" onsubmit="processDoorChoice(event)">
+        <div class="infoText2">There are multiple doors available for this room. Please select your preference.</div>
+        <select id="doorSelect" required>
+          <option value="a1">Door A1</option>
+          <option value="a2">Door A2</option>
+          <option value="a3">Door A3</option>
+          <option value="b1">Door B1</option>
+          <option value="b2">Door B2</option>
+          <option value="b3">Door B3</option>
+        </select> <br>
+        <button type="submit" id="submit" class="submit2">
+          SUBMIT
+        </button>
+      </form>
+    </div>
     <h1 id="eventsTitle">Request Navigator Assistance</h1>
     <div class="centerMiddle">
       <h3 class='infoText'>
@@ -13,7 +29,7 @@
       </h3>
 
       <form id="submitLocation" onsubmit="processRequest(event)" autocomplete="off">
-        <input type="text" placeholder="9.999" maxlength="6" id="roomNumberSubmission" required oninput="changedInput()"></input>
+        <input type="text" placeholder="9.999" maxlength="7" id="roomNumberSubmission" required oninput="changedInput()"></input>
         <button type="submit" id="submit" class="submit1">
           SUBMIT
         </button>

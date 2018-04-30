@@ -5,39 +5,69 @@
 */
 
 const IP_V4 = "http://10.148.183.240:3000";
+const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
 let validInput = true;
+let doorCode = "";
 
 function processRequest(event) {
   event.preventDefault();
   let submittedNumber = document.getElementById('roomNumberSubmission').value.replace('.', '_');
-  let doorCode = `d${submittedNumber}`;
+  doorCode = `d${submittedNumber}`;
   //currently only sends user to first door found; in future, provide choice of doors?
   let doorIndex = DOOR_LIST.indexOf(doorCode);
 
   if (doorIndex === -1) {
-    validInput = false;
-    document.getElementById("roomNumberSubmission").style.border = "1.5px red dotted";
-    document.getElementById("errorText").style.visibility = "visible";
+    //Handling doors that dont comply to d3_###
+    let specialOptions = SPECIAL_DOORS.indexOf(doorCode);
+    if (specialOptions != -1) {
+      if (specialOptions == 2) {
+        doorCode = "d3_816a";
+        sendRequest();
+      }
+      //Multiple doors possible here.
+      //index 0 = 414, index 1 = 710
+      else {
+        document.getElementById("chooseDoors").style.visibility = "visible";
+        //make other things unclickable? hmm
+      }
+    }
+    else {
+      validInput = false;
+      document.getElementById("roomNumberSubmission").style.border = "1.5px red dotted";
+      document.getElementById("errorText").style.visibility = "visible";
+      //reset input box
+      document.getElementById("roomNumberSubmission").value = "";
+    }
   }
   else {
-    fetch(IP_V4 + '/userCurrentLocation', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
-      if (response.status == 200) {
-        console.log("Room number of user's current location successfully sent");
-        document.getElementById("roomNumberSubmission").style.border = "1.5px green dotted";
-        alert("Request successfully sent! Robot is coming to you, please wait...");
-        //make sure that input is not longer editable
-        //after robot arrives, automatically redirect (?) on app.js
-      }
-      else {
-        console.log(response);
-        console.log("Room number of user's current location failed to send. An error occurred");
-      }
-    });
+    sendRequest();
   }
+}
 
-  //reset input box
-  document.getElementById("roomNumberSubmission").value = "";
-  alert(formattedNumber);
+function processDoorChoice(event) {
+  event.preventDefault();
+  let doorChoice = document.getElementById("doorSelect").value;
+  doorCode = doorCode + doorChoice;
+  document.getElementById("chooseDoors").style.visibility = "hidden";
+  sendRequest();
+}
+
+function sendRequest() {
+  fetch(IP_V4 + '/userCurrentLocation', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
+    if (response.status == 200) {
+      console.log("Room number of user's current location successfully sent");
+      document.getElementById("roomNumberSubmission").style.border = "1.5px green dotted";
+      document.getElementById("roomNumberSubmission").value = "";
+      console.log(doorCode);
+      alert("Request successfully sent! Robot is coming to you, please wait...");
+      //make sure that input is not longer editable
+      //after robot arrives, automatically redirect (?) on app.js
+    }
+    else {
+      console.log(response);
+      console.log("Room number of user's current location failed to send. An error occurred");
+    }
+  });
 }
 
 function changedInput() {

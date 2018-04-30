@@ -3,7 +3,7 @@
 
 const IP_V4 = "http://10.148.183.240:3000";
 const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
-var doorCode = "";
+let doorCode = "";
 
 window.onload = function() {
   let buttonContainer = document.getElementById("buttonContainer");
@@ -98,4 +98,4 @@ function sendRequest() {
 
 //Special Doors: 414(6 doors, a1-a3 and b1-b3), 816(just a), 710(a1-a3, b1-b3)
 //NOTE: remove special doors from list?
-const DOOR_LIST = ["d3_404", "d3_400", "d3_508", "d3_402", "d3_500", "d3_502", "d3_430", "d3_422", "d3_420", "d3_414a2", "d3_414a3", "d3_414a1", "d3_416", "d3_516", "d3_418", "d3_512", "d3_510", "d3_414b3", "d3_414b2", "d3_414b1", "d3_432", "d3_436", "d3_824", "d3_816a", "d3_710b1", "d3_710b2", "d3_710b3", "d3_710a1", "d3_710a2", "d3_710a3", "d3_600", "d3_303"];
+const DOOR_LIST = ["d3_404", "d3_400", "d3_508", "d3_402", "d3_500", "d3_502", "d3_430", "d3_422", "d3_420", "d3_416", "d3_516", "d3_418", "d3_512", "d3_510", "d3_432", "d3_436", "d3_824", "d3_600", "d3_303"];
