@@ -2,6 +2,8 @@
 //select location.
 
 const IP_V4 = "http://10.148.183.240:3000";
+const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
+var doorCode = "";
 
 window.onload = function() {
   let buttonContainer = document.getElementById("buttonContainer");
@@ -38,18 +40,43 @@ function sendEventRoom(event) {
 
   //Now that we know that the room number is on the third floor, we can determine available doors as necessary.
   let processedRoomNumber = roomText.substring(roomText.indexOf('3.')).replace('.', '_');;
-  //TODO: determine available door numbers, check to see if user cares;
-  //if so, provde selection; otherwise, go straight onwards
-  //for now, only provide 1 door (first door found);
-  let doorCode = `d${processedRoomNumber}`;
+  //Featuring: Hard coded logic for special doors cause hey, why not?
+  doorCode = `d${processedRoomNumber}`;
   let doorIndex = DOOR_LIST.indexOf(doorCode);
-  //Error handling for invalid 3rd floor location, should never happen in demo
+
   if (doorIndex == -1) {
+    //Handling doors that dont comply to d3_###
+    let specialOptions = SPECIAL_DOORS.indexOf(doorCode);
+    if (specialOptions != -1) {
+      if (specialOptions == 2) {
+        doorCode = "d3_816a";
+        sendRequest();
+      }
+      //Multiple doors possible here.
+      //index 0 = 414, index 1 = 710
+      else {
+        document.getElementById("chooseDoors").style.visibility = "visible";
+        //make other things unclickable? hmm
+      }
+    }
+    //just not a door, lol
+    else {
       alert("Sorry, but that room does not exist in our directory.");
       return;
+    }
   }
+  else sendRequest();
+}
 
+function processDoorChoice(event) {
+  event.preventDefault();
+  let doorChoice = document.getElementById("doorSelect").value;
+  doorCode = doorCode + doorChoice;
+  document.getElementById("chooseDoors").style.visibility = "hidden";
+  sendRequest();
+}
 
+function sendRequest() {
   //request made to broadcast room number
   //IT WORKS WOOOOOOOOOO only on computer but that is sufficient!!!!!!!
   //possible todo: trouble shoot safri?
@@ -58,6 +85,9 @@ function sendEventRoom(event) {
       console.log("(Door of) room of interest successfully sent");
       //alert for now, but can be replaced in future with more cosmetically pleasing notification
       alert("Successful transmission! Robot is now navigating.");
+      //Redirect user to waiting page? Robot is now navigating, please wait?
+      //considered css for a moment, but wouldn't work because no way to get feedback from subscriber
+      //IDEA: get subscriber to re-render page when message is sent? so like send message on receival of command and another message upon success...
     }
     else {
       console.log(response);
@@ -66,4 +96,6 @@ function sendEventRoom(event) {
   });
 }
 
+//Special Doors: 414(6 doors, a1-a3 and b1-b3), 816(just a), 710(a1-a3, b1-b3)
+//NOTE: remove special doors from list?
 const DOOR_LIST = ["d3_404", "d3_400", "d3_508", "d3_402", "d3_500", "d3_502", "d3_430", "d3_422", "d3_420", "d3_414a2", "d3_414a3", "d3_414a1", "d3_416", "d3_516", "d3_418", "d3_512", "d3_510", "d3_414b3", "d3_414b2", "d3_414b1", "d3_432", "d3_436", "d3_824", "d3_816a", "d3_710b1", "d3_710b2", "d3_710b3", "d3_710a1", "d3_710a2", "d3_710a3", "d3_600", "d3_303"];

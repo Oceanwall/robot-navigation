@@ -137,7 +137,7 @@ function getEvents(options) {
           title: "FRI Final Project Demo 2",
           description: "Lorem Ipsum, Lorem Ipsum, some really cool event about robots and FRI",
           date: "Tuesday, May 8, 2018. Start time: 2:00 PM",
-          room: "GDC 3.404"
+          room: "GDC 3.414"
         };
 
         let demoObject3 = {

@@ -24,7 +24,7 @@ function processRequest(event) {
       if (response.status == 200) {
         console.log("Room number of user's current location successfully sent");
         document.getElementById("roomNumberSubmission").style.border = "1.5px green dotted";
-        alert("Request successfully sent! Robot is coming to you, please wait...")
+        alert("Request successfully sent! Robot is coming to you, please wait...");
         //make sure that input is not longer editable
         //after robot arrives, automatically redirect (?) on app.js
       }

@@ -52,6 +52,12 @@
   font-weight: 400;
   font-size: 2em;
 }
+.infoText2 {
+  margin-top: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 1.3em;
+}
 .centerMiddle {
   display: relative;
   width: 60%;
@@ -67,8 +73,13 @@
   font-size: 10vh;
   font-family: 'Alegreya Sans', sans-serif;
 }
-#submit {
+.submit1 {
   margin-top: 5vh;
+}
+.submit2 {
+  margin-top: 1vw;
+}
+#submit {
   width: 20vw;
   height: 6vh;
 
@@ -105,4 +116,31 @@ input:focus {
 
   color: red;
   visibility: hidden;
+}
+#chooseDoors {
+  position: fixed;
+  width: 40vw;
+  height: 20vh;
+
+  text-align: center;
+  margin-left: 29vw;
+  margin-top: 30vh;
+
+  border: black 2px solid;
+  border-radius: 20px;
+
+  background: #f49e42;
+  box-shadow: 1px 1.5px 1px 1.5px grey;
+  z-index: 10;
+  visibility: hidden;
+}
+#doorSelect {
+  margin-top: 10px;
+  width: 13vw;
+  height: 5vh;
+
+  text-align: center;
+
+  font-size: 3vh;
+  font-family: 'Alegreya Sans', sans-serif;
 }
