@@ -10,6 +10,7 @@ const ROSLIB = require("roslib")
 
 var index = require('./routes/index');
 var requestRobot = require('./routes/requestRobot');
+var loadingScreen = require('./routes/loadingScreen');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/eventSelector', index);
+app.use('/loadingScreen', loadingScreen);
 app.use('/', requestRobot);
 
 //TODO: create ros subscriber node for feedback to user?
@@ -88,6 +90,16 @@ app.post('/userCurrentLocation', function(req, res) {
 	// roomNumber.publish(message);
 	res.status(200).send("success");
 });
+
+//THE FRONT END HAS TO DO THE REDIRECTING
+//EXPRESS CANNOT REDIRECT PAGE URLS FOR YOU
+//AHHHHHHHHHHHHH THIS TOOK 2 HOURS TO FIGURE OUT >:()
+//OK, so current plan is to use a setInterval timer to wait for message from ROS,
+//and upon receiving message, redirect user?
+//so in loading screen, send fetch request, in here, use setinterval to constantly wait, and upon receving message from ROS, set global variable? and constsantly cheeck
+//Option 1) Periodically send fetch requests, change URL depending on response (alert as well!)
+//Option 2) Send one fetch request, use setinterval loop in here, respond when done!
+//Currently going with option 2
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
