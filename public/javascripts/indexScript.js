@@ -1,7 +1,7 @@
 //Used by user when in proximity to robot so that robot can guide user to
 //select location.
 
-const IP_V4 = "http://10.147.121.127:3000";
+const IP_V4 = "http://localhost:3000";
 const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
 const TAGS = ['food', 'networking', 'club', 'seminar'];
 let doorCode = "";
@@ -25,8 +25,7 @@ window.onload = function() {
       let currentTag = tagList.substring(0, space);
       //depending on current tag, add an icon.
       let icon = document.createElement('img');
-      icon.height = 50;
-      icon.width = 50;
+      icon.classList.add('icon');
 
       if (currentTag == "food") {
         icon.src = "../images/food.png";
@@ -134,6 +133,9 @@ function sendRequest() {
   });
 }
 
+function transferViews() {
+  document.location.href = IP_V4 + "";
+}
+
 //Special Doors: 414(6 doors, a1-a3 and b1-b3), 816(just a), 710(a1-a3, b1-b3)
-//NOTE: remove special doors from list?
 const DOOR_LIST = ["d3_404", "d3_400", "d3_508", "d3_402", "d3_500", "d3_502", "d3_430", "d3_422", "d3_420", "d3_416", "d3_516", "d3_418", "d3_512", "d3_510", "d3_432", "d3_436", "d3_824", "d3_600", "d3_303"];

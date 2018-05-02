@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Request GDC Event Navigator</title>
+    <title>Direct GDC Navigation</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/requestRobotScript.js" type="text/javascript"></script>
   </head>
   <body>
-    <div id="chooseDoors" class='requestLocation'>
+    <div id="chooseDoors" class='doorRequestBlock'>
       <form id="doorForm" onsubmit="processDoorChoice(event)">
         <div class="infoText2">There are multiple doors available for this room. Please select your preference.</div>
         <select id="doorSelect" required>
@@ -17,29 +17,30 @@
           <option value="b2">Door B2</option>
           <option value="b3">Door B3</option>
         </select> <br>
-        <button type="submit" id="submit" class="submit2">
+        <button type="submit" class="submit submit2">
           SUBMIT
         </button>
       </form>
     </div>
-    <h1 id="eventsTitle">Request Navigator Assistance</h1>
+    <h1 id="eventsTitle">Direct Navigator Assistance</h1>
     <div class="centerMiddle">
       <h3 class='infoText'>
-        This service allows you to request a robot navigator to your current location. The robot can be used for guidance to an event happening in the GDC.
+        This service allows you to request direct navigation to a specific room. <br> <br>
+        To begin, please enter the room number of interest.
       </h3>
 
       <form id="submitLocation" onsubmit="processRequest(event)" autocomplete="off">
-        <input type="text" placeholder="9.999" maxlength="7" id="roomNumberSubmission" required oninput="changedInput()"></input>
-        <button type="submit" id="submit" class="submit1">
+        <input type="text" placeholder="9.999" maxlength="7" id="roomNumberSubmission" required oninput="changedInput()"></input> <br>
+        <button type="submit" class="submit submit1">
           SUBMIT
         </button>
         <div id="errorText">Sorry, that's an invalid room number. Note that we currently only provide service to the third floor. Please try again!</div>
       </form>
-
-      <h3 class="infoText">
-        To begin, please enter the room number where you're currently located.
-      </h3>
     </div>
+
+    <button class="eventButton" id="bottom" onclick="transferViews()">
+      Return to Event Selection Page
+    </button>
 
   </body>
 </html>

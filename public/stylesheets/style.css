@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700|Source+Sans+Pro|Alegreya+Sans');
-
-/* questionable CSS */
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700|Source+Sans+Pro|Alegreya+Sans|Montserrat');
 #eventsTitle {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
@@ -23,7 +21,7 @@
   margin-left: 20%;
   margin-bottom: 25px;
 
-  background: #a0a2ff;
+  background: #7a7bff;
   cursor: pointer;
 
   border: #041e47 3px solid;
@@ -44,8 +42,8 @@
   transform: scale(1.1, 1.1);
 }
 @keyframes changeColor {
-  from {background: #a0a2ff;}
-  to {background: #6667d1;}
+  from {background: #7a7bff;}
+  to {background: #a0a2ff;}
 }
 .infoText {
   font-family: 'Source Sans Pro', sans-serif;
@@ -60,8 +58,8 @@
 }
 .centerMiddle {
   display: relative;
-  width: 60%;
-  margin-left: 20%;
+  width: 65%;
+  margin-left: 17.5%;
   text-align: center;
 }
 #roomNumberSubmission {
@@ -75,20 +73,26 @@
 }
 .submit1 {
   margin-top: 5vh;
+  font-size: 2vw;
+  width: 24vw;
+  height: 12vh;
 }
 .submit2 {
-  margin-top: 1vw;
-}
-#submit {
+  margin-top: 3.5vh;
+  font-size: 2vw;
   width: 20vw;
   height: 6vh;
-
+}
+.submit3 {
+  width: 80%;
+  height: 10vh;
+  font-size: 2vh;
+}
+.submit {
   border: 1.5px solid black;
   border-radius: 3px;
 
   background-color: white;
-
-  font-size: 2vw;
   font-family: 'Montserrat', sans-serif;
 
   -webkit-transform: perspective(1px) translateZ(0);
@@ -100,7 +104,7 @@
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
 }
-#submit:hover {
+.submit:hover {
   cursor: pointer;
   -webkit-transform: scale(1.1, 1.1);
   transform: scale(1.1, 1.1);
@@ -121,21 +125,12 @@ input:focus {
   border: black 2px solid;
   border-radius: 20px;
 
-  background: #f49e42;
+  background: #6DC0FF;
   box-shadow: 1px 1.5px 1px 1.5px grey;
   z-index: 10;
   visibility: hidden;
 }
-.selectorLocation {
-  position: fixed;
-  width: 40vw;
-  height: 20vh;
-
-  text-align: center;
-  margin-left: 29vw;
-  margin-top: 30vh;
-}
-.requestLocation {
+.doorRequestBlock {
   position: fixed;
   width: 50vw;
   height: 25vh;
@@ -160,4 +155,40 @@ input:focus {
 .iconHolder {
   display: flex;
   justify-content: space-evenly;
+}
+.icon {
+  height: 50px;
+  width: 50px;
+}
+#guide {
+  position: fixed;
+  display: absolute;
+
+  top: 0px;
+  margin-left: 2.5%;
+  width: 10%;
+  height: 670px;
+
+  background-color: #afb1ff;
+
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+
+  border-bottom: black solid 2px;
+  border-left: black solid 2px;
+  border-right: black solid 2px;
+  border-radius: 3px;
+}
+#bottom {
+  position: absolute;
+  top: 89%;
+  height: 6%;
+  width: 35%;
+
+  margin-left: 32.4%;
+  border: 1.5px black solid;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3vh;
+  font-weight: 500;
 }

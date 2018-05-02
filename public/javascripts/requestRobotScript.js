@@ -4,7 +4,7 @@
     It validates the user's room number input to ensure that it's a valid room.
 */
 
-const IP_V4 = "http://10.147.121.127:3000";
+const IP_V4 = "http://localhost:3000";
 const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
 let validInput = true;
 let doorCode = "";
@@ -75,6 +75,10 @@ function changedInput() {
     document.getElementById("roomNumberSubmission").style.border = "1.5px black dotted";
     document.getElementById("errorText").style.visibility = "hidden";
   }
+}
+
+function transferViews() {
+  document.location.href = IP_V4 + "/eventSelector";
 }
 
 //List of acceptable doors for BWI_KR navigation was obtained from https://github.com/utexas-bwi/bwi_common/blob/master/bwi_kr_execution/domain/navigation_facts.asp

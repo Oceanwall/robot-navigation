@@ -6,7 +6,21 @@
     <script src="/javascripts/indexScript.js" type="text/javascript"></script>
   </head>
   <body>
-    <div id="chooseDoors" class="selectorLocation">
+    <div id="guide">
+      <h2 class="eventTitle">LEGEND</h2>
+      <img class="icon" src="../images/food.png" alt="Food-providing Event"></img> <br>
+      This event provides food. <br><br>
+      <img class="icon" src="../images/networking.png" alt="Networking Event"></img> <br>
+      This event provides networking potential. <br><br>
+      <img class="icon" src="../images/club.png" alt="Club-sponsored Event"></img> <br>
+      This event is hosted by a club. <br><br>
+      <img class="icon" src="../images/seminar.png" alt="Seminar or Lecture Event"></img> <br>
+      This event is a lecture or seminar. <br><br>
+      <button type="button" class="submit submit3" onclick="transferViews()">
+        Return to Direct Navigation
+      </button>
+    </div>
+    <div id="chooseDoors" class="doorRequestBlock">
       <form id="doorForm" onsubmit="processDoorChoice(event)">
         <div class="infoText2">There are multiple doors available for this room. Please select your preference.</div>
         <select id="doorSelect" required>
@@ -17,7 +31,7 @@
           <option value="b2">Door B2</option>
           <option value="b3">Door B3</option>
         </select> <br>
-        <button type="submit" id="submit" class="submit2">
+        <button type="submit" class="submit submit2">
           SUBMIT
         </button>
       </form>
