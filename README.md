@@ -11,6 +11,7 @@ Current TODOs:
 * Merge subscriber code from program currently on bender
 
 Future TODOs:
-* STOP option on the loading screen
+* implement functionality of STOP option on the loading screen
 * Screen to display while returning back to base (with option to stop)
-* Make prettier alerts
+* Create another server to actively show where the robot currently is.
+* When door alert pops up, make everything else unclickable

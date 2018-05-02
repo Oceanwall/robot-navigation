@@ -71,7 +71,8 @@ function sendEventRoom(event) {
   //determine if room number is on the third floor; if not, provide rejection
   //TODO: do something better than an alert?
   if (roomText.indexOf('3.') == -1) {
-    alert("Sorry, but functionality of this robot is currently only limited to the third floor.");
+    // alert("Sorry, but functionality of this robot is currently only limited to the third floor.");
+    swal("Sorry, but functionality of this robot is currently only limited to the third floor.", "", "error");
     //break out, dont send the post request
     return;
   }
@@ -99,7 +100,8 @@ function sendEventRoom(event) {
     }
     //just not a door, lol
     else {
-      alert("Sorry, but that room does not exist in our directory.");
+      // alert("Sorry, but that room does not exist in our directory.");
+      swal("Sorry, but that room does not exist in our directory.", "", "error");
       return;
     }
   }
@@ -121,10 +123,10 @@ function sendRequest() {
   fetch(IP_V4 + '/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
     if (response.status == 200) {
       console.log("(Door of) room of interest successfully sent");
-      //alert for now, but can be replaced in future with more cosmetically pleasing notification
-      alert("Successful transmission! Robot is now navigating.");
-      //IDEA: get subscriber to re-render page when message is sent? so like send message on receival of command and another message upon success...
-      document.location.href = IP_V4 + "/loadingScreen";
+      // alert("Successful transmission! Robot is now navigating.");
+      swal("Successful transmission! Robot is now navigating.", "", "success").then((value) => {
+        document.location.href = IP_V4 + "/loadingScreen";
+      });
     }
     else {
       console.log(response);

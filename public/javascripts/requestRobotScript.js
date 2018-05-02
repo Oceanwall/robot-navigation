@@ -59,8 +59,10 @@ function sendRequest() {
       document.getElementById("roomNumberSubmission").style.border = "1.5px green dotted";
       document.getElementById("roomNumberSubmission").value = "";
       console.log(doorCode);
-      alert("Request successfully sent! Robot is coming to you, please wait...");
-      document.location.href = IP_V4 + "/loadingScreen";
+      // alert("Request successfully sent! Robot is coming to you, please wait...");
+      swal("Request successfully sent! Robot is now navigating...", "", "success").then((value) => {
+        document.location.href = IP_V4 + "/loadingScreen";
+      });
     }
     else {
       console.log(response);
