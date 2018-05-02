@@ -154,3 +154,10 @@ input:focus {
   font-size: 2vw;
   font-family: 'Alegreya Sans', sans-serif;
 }
+.invisible {
+  display: none;
+}
+.iconHolder {
+  display: flex;
+  justify-content: space-evenly;
+}

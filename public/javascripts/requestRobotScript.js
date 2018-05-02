@@ -4,7 +4,7 @@
     It validates the user's room number input to ensure that it's a valid room.
 */
 
-const IP_V4 = "http://10.148.183.240:3000";
+const IP_V4 = "http://10.147.121.127:3000";
 const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
 let validInput = true;
 let doorCode = "";

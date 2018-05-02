@@ -1,17 +1,56 @@
 //Used by user when in proximity to robot so that robot can guide user to
 //select location.
 
-const IP_V4 = "http://10.148.183.240:3000";
+const IP_V4 = "http://10.147.121.127:3000";
 const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
+const TAGS = ['food', 'networking', 'club', 'seminar'];
 let doorCode = "";
 
 window.onload = function() {
-  let buttonContainer = document.getElementById("buttonContainer");
-  let buttons = buttonContainer.childNodes;
+  // let buttonContainer = document.getElementById("buttonContainer");
+  let buttons = document.getElementsByClassName("eventButton");
+  let tags = document.getElementsByClassName('invisible');
+  let iconHolders = document.getElementsByClassName('iconHolder');
 
-  //adds event listeners to each of the buttons
+  //adds event listeners and icons to each of the buttons
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", sendEventRoom);
+  }
+
+  for (let i = 0; i < tags.length; i++) {
+    let tagList = tags[i].innerHTML;
+    console.log(tagList);
+    let space = tagList.indexOf(' ');
+    while (space != -1) {
+      let currentTag = tagList.substring(0, space);
+      //depending on current tag, add an icon.
+      let icon = document.createElement('img');
+      icon.height = 50;
+      icon.width = 50;
+
+      if (currentTag == "food") {
+        icon.src = "../images/food.png";
+        icon.alt = "Food-providing Event";
+        iconHolders[i].appendChild(icon);
+      }
+      else if (currentTag == "networking") {
+        icon.src = "../images/networking.png";
+        icon.alt = "Networking Event";
+        iconHolders[i].appendChild(icon);
+      }
+      else if (currentTag == "club") {
+        icon.src = "../images/club.png";
+        icon.alt = "Club-sponsored Event";
+        iconHolders[i].appendChild(icon);
+      }
+      else if (currentTag == "seminar") {
+        icon.src = "../images/seminar.png";
+        icon.alt = "Seminar or Lecture Event";
+        iconHolders[i].appendChild(icon);
+      }
+      tagList = tagList.substring(space + 1);
+      space = tagList.indexOf(' ');
+    }
   }
 }
 

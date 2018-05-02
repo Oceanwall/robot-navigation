@@ -5,13 +5,17 @@ const cheerio = require('cheerio');
 
 var router = express.Router();
 
+const FOOD = ['pizza', 'brunch', 'soda', 'donut', 'snacks'];
+const NETWORKING = ['career', 'chat', 'talk'];
+const CLUB = ['convergent', 'abcs', 'wics', 'mad', 'isss', 'acm'];
+const SEMINAR = ['speaker', 'audience', 'abstract'];
+
 const options = {
   uri: "https://www.cs.utexas.edu/events",
   transform: function (body) {
     return cheerio.load(body);
   }
 }
-var DETAILS = [];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -79,6 +83,11 @@ function getEvents(options) {
 
             //adjusts description length to avoid super long descriptions
             let currentDescription = currentObject.description.substring(realDescriptionStart);
+
+            //this code checks the description for certain keywords, and decides whether
+            //to assign specific tags to them depending on their presence
+            currentObject.tags = getTags(currentDescription, currentObject.title);
+
             if (currentDescription.length > 300) {
               currentDescription = currentDescription.substring(0, 300) + "...";
             }
@@ -130,21 +139,24 @@ function getEvents(options) {
           title: "FRI Final Project Demo 1",
           description: "A room to navigate to. How convenient!",
           date: "Monday, May 7, 2018. Start time: 12:00 PM",
-          room: "GDC 3.512"
+          room: "GDC 3.512",
+          tags: 'seminar',
         };
 
         let demoObject2 = {
           title: "FRI Final Project Demo 2",
           description: "Lorem Ipsum, Lorem Ipsum, some really cool event about robots and FRI",
           date: "Tuesday, May 8, 2018. Start time: 2:00 PM",
-          room: "GDC 3.414"
+          room: "GDC 3.414",
+          tags: 'food club',
         };
 
         let demoObject3 = {
           title: "FRI Final Project Demo 3",
           description: "Demonstration of the best FRI spring semester project",
           date: "Thursday, May 10, 2018. Start time: 2:00 PM",
-          room: "GDC 3.420"
+          room: "GDC 3.420",
+          tags: 'networking seminar'
         };
 
         result.splice(5, 0, demoObject1);
@@ -195,4 +207,41 @@ function prepareOptions(urlTargets) {
   }
 
   return optionArray;
+}
+
+//extracts tags from the description
+function getTags(description, title) {
+  let tags = '';
+
+  let combinedLine = (description + title).toLowerCase();
+
+  for (let i = 0; i < FOOD.length; i++) {
+    if (combinedLine.indexOf(FOOD[i]) != -1) {
+      tags += "food ";
+      i = FOOD.length;
+    }
+  }
+
+  for (let i = 0; i < NETWORKING.length; i++) {
+    if (combinedLine.indexOf(NETWORKING[i]) != -1) {
+      tags += "networking ";
+      i = NETWORKING.length;
+    }
+  }
+
+  for (let i = 0; i < CLUB.length; i++) {
+    if (combinedLine.indexOf(CLUB[i]) != -1) {
+      tags += "club ";
+      i = CLUB.length;
+    }
+  }
+
+  for (let i = 0; i < SEMINAR.length; i++) {
+    if (combinedLine.indexOf(SEMINAR[i]) != -1) {
+      tags += "seminar ";
+      i = SEMINAR.length;
+    }
+  }
+
+  return tags;
 }

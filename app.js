@@ -65,6 +65,16 @@ var roomNumber = new ROSLIB.Topic({
 	name: '/roomNumber',
 	messageType: 'std_msgs/String',
 });
+
+var robotListener = new ROSLIB.Topic({
+  ros: ros,
+  name: '/topicNameHere',
+  serviceType: 'std-msgs/String',
+});
+
+robotListener.subscribe(function (message) {
+  received = true;
+});
 */
 
 //get room number of event to navigate to
@@ -105,6 +115,7 @@ app.post('/userCurrentLocation', function(req, res) {
 app.post('/checkIfArrived', function(req, res) {
   if (received) {
     res.status(200).send("Success");
+    received = false;
   }
   else res.status(418).send("Nope, still waiting");
 });
