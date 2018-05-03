@@ -9,6 +9,35 @@ const SPECIAL_DOORS = ["d3_414", "d3_710", "d3_816"];
 let validInput = true;
 let doorCode = "";
 
+window.onload = function() {
+  //first check if at base; if not, then start timer...
+  fetch(IP_V4 + '/checkIfAtBase', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
+    if (response.status != 200) {
+      console.log("Timer on");
+      let count = 0;
+      setInterval(function() {
+        if (count == 3) {
+          //initiate return to base TODO:
+          //switch page to returning
+          document.location.href = IP_V4 + "/returningScreen";
+        }
+        count++;
+        console.log("15 seconds have elapsed");
+        console.log(count);
+        if (count == 2) {
+          //reset count to 0 if warning is acknowledged
+          swal("Are you still there? Click anywhere on the screen to stop Bender from navigating home.", "", "warning").then((value) => {
+            count = 0;
+          });
+        }
+      }, 15000);
+    }
+    else {
+      console.log("Timer is NOT on");
+    }
+  });
+}
+
 function processRequest(event) {
   event.preventDefault();
   let submittedNumber = document.getElementById('roomNumberSubmission').value.replace('.', '_');

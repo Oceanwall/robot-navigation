@@ -114,6 +114,16 @@
 
   font-size: 10vh;
 }
+.submit5 {
+  background-color: #91ffaa;
+  width: 80%;
+  height: 140px;
+
+  border: 3px solid black;
+  border-radius: 3px;
+
+  font-size: 10vh;
+}
 .submit:hover {
   cursor: pointer;
   -webkit-transform: scale(1.1, 1.1);
@@ -125,6 +135,13 @@
 @keyframes changeColor2 {
   from {background: #ffa0a0;}
   to {background: #ff2323;}
+}
+.submit5:hover {
+  animation: changeColor3 .25s forwards
+}
+@keyframes changeColor3 {
+  from {background: #91ffaa;}
+  to {background: #28fc59;}
 }
 input:focus {
   outline: none;

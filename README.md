@@ -12,6 +12,7 @@ Current TODOs:
 
 Future TODOs:
 * implement functionality of STOP option on the loading screen
-* Screen to display while returning back to base (with option to stop)
+* implement screen to display while returning back to base (with option to stop) (constant requests to server)
+* must constantly reset atBase to determine if timers should be set
 * Create another server to actively show where the robot currently is.
 * When door alert pops up, make everything else unclickable

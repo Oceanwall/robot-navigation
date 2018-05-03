@@ -11,9 +11,11 @@ const ROSLIB = require("roslib")
 var index = require('./routes/index');
 var requestRobot = require('./routes/requestRobot');
 var loadingScreen = require('./routes/loadingScreen');
+var returningScreen = require('./routes/returningScreen');
 
 var app = express();
 var received = true;
+var atBase = true;
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -35,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/eventSelector', index);
 app.use('/loadingScreen', loadingScreen);
+app.use('/returningScreen', returningScreen);
 app.use('/', requestRobot);
 
 //TODO: create ros subscriber node for feedback to user?
@@ -117,7 +120,15 @@ app.post('/checkIfArrived', function(req, res) {
     res.status(200).send("Success");
     received = false;
   }
-  else res.status(418).send("Nope, still waiting");
+  else res.status(418).send("Nope, still going");
+});
+
+app.post('/checkIfAtBase', function(req, res) {
+  if (atBase) {
+    res.status(200).send("Success");
+    atBase = false;
+  }
+  else res.status(418).send("Nope, still returning");
 });
 
 // catch 404 and forward to error handler
