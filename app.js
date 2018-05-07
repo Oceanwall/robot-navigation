@@ -14,8 +14,8 @@ var loadingScreen = require('./routes/loadingScreen');
 var returningScreen = require('./routes/returningScreen');
 
 var app = express();
-var received = true;
-var atBase = true;
+var arrived = false;
+// var atBase = false;
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -40,11 +40,7 @@ app.use('/loadingScreen', loadingScreen);
 app.use('/returningScreen', returningScreen);
 app.use('/', requestRobot);
 
-//TODO: create ros subscriber node for feedback to user?
-
-/*
 //presume that the rosbridge server is on localhost, default port 9090
-//TODO: change localhost to IPv4 constant?
 var ros = new ROSLIB.Ros({
   url: 'ws://localhost:9090'
 });
@@ -61,74 +57,61 @@ ros.on('close', function() {
  console.log('Connection to websocket server closed.');
 });
 
-//topic publishing
-//create the topic
+//Topic creation (publishers and subscribers)
 var roomNumber = new ROSLIB.Topic({
 	ros: ros,
 	name: '/roomNumber',
 	messageType: 'std_msgs/String',
 });
 
+var stopper = new ROSLIB.Topic({
+  ros: ros,
+  name: '/stopNav',
+  messageType: 'std_msgs/String',
+});
+
 var robotListener = new ROSLIB.Topic({
   ros: ros,
-  name: '/topicNameHere',
+  name: '/chatter_pub',
   serviceType: 'std-msgs/String',
 });
 
 robotListener.subscribe(function (message) {
-  received = true;
+  console.log("arrived arrived");
+  arrived = true;
 });
-*/
 
-//get room number of event to navigate to
+//Send room number of event for ROS client to navigate to
 app.post('/sendRoomNumber', function(req, res) {
 	let keys = Object.keys(req.body);
 	let number = keys[0];
 	console.log(number);
-	// let message = new ROSLIB.Message({
-	// 	data: number,
-	// });
-	// roomNumber.publish(message);
+	let message = new ROSLIB.Message({
+		data: number,
+	});
+  arrived = false;
+	roomNumber.publish(message);
 	res.status(200).send("success");
 });
 
-//get room number of user to navigate to
-//TODO: different publishers? consider...
-app.post('/userCurrentLocation', function(req, res) {
-	let keys = Object.keys(req.body);
-	let number = keys[0];
-	console.log(number);
-	// let message = new ROSLIB.Message({
-	// 	data: number,
-	// });
-	// roomNumber.publish(message);
-	res.status(200).send("success");
-});
-
-//THE FRONT END HAS TO DO THE REDIRECTING
-//EXPRESS CANNOT REDIRECT PAGE URLS FOR YOU
-//AHHHHHHHHHHHHH THIS TOOK 2 HOURS TO FIGURE OUT >:()
-//OK, so current plan is to use a setInterval timer to wait for message from ROS,
-//and upon receiving message, redirect user?
-//so in loading screen, send fetch request, in here, use setinterval to constantly wait, and upon receving message from ROS, set global variable? and constsantly cheeck
-//Option 1) Periodically send fetch requests, change URL depending on response (alert as well!)
-//Option 2) Send one fetch request, use setinterval loop in here, respond when done!
-//Currently going with option 2
-
+//Check if the robot has arrived at its destination
 app.post('/checkIfArrived', function(req, res) {
-  if (received) {
+  if (arrived) {
     res.status(200).send("Success");
-    received = false;
+    arrived = false;
   }
   else res.status(418).send("Nope, still going");
 });
 
-app.post('/checkIfAtBase', function(req, res) {
-  if (atBase) {
-    res.status(200).send("Success");
-    atBase = false;
-  }
-  else res.status(418).send("Nope, still returning");
+//Stop the robot while it's navigating to an event.
+app.post('/stopRobot', function(req, res) {
+  let message = new ROSLIB.Message({
+    data: "stop",
+  });
+  console.log("stopped command sent");
+  stopper.publish();
+  arrived = true;
+  res.status(200).send("stopped");
 });
 
 // catch 404 and forward to error handler

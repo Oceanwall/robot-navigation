@@ -1,3 +1,4 @@
+/* General stylesheet for front-end interface. */
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700|Source+Sans+Pro|Alegreya+Sans|Montserrat');
 #eventsTitle {
   font-family: 'Montserrat', sans-serif;
@@ -180,7 +181,7 @@ input:focus {
 
   text-align: center;
 
-  font-size: 2vw;
+  font-size: 1.8vw;
   font-family: 'Alegreya Sans', sans-serif;
 }
 .invisible {
@@ -215,8 +216,8 @@ input:focus {
 }
 #bottom {
   position: absolute;
-  top: 89%;
-  height: 6%;
+  top: 93%;
+  height: 5%;
   width: 35%;
 
   margin-left: 32.4%;
@@ -226,7 +227,6 @@ input:focus {
   font-size: 3vh;
   font-weight: 500;
 }
-
 
 /* CSS to alter SweetAlert */
 .swal-title {

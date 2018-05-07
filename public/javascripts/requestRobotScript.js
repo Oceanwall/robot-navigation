@@ -1,7 +1,5 @@
-/*  This JS script is in charge of allowing the user to enter the room number where
-    they're currently located so that the robot can navigate to them (if the robot's not
-    otherwise busy).
-    It validates the user's room number input to ensure that it's a valid room.
+/*  Allows for direct navigation to a certain room number / door number.
+    Validates the user's room number input to ensure that it's a valid room.
 */
 
 const IP_V4 = "http://localhost:3000";
@@ -10,39 +8,38 @@ let validInput = true;
 let doorCode = "";
 
 window.onload = function() {
-  //first check if at base; if not, then start timer...
-  fetch(IP_V4 + '/checkIfAtBase', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
-    if (response.status != 200) {
-      console.log("Timer on");
-      let count = 0;
-      setInterval(function() {
-        if (count == 3) {
-          //initiate return to base TODO:
-          //switch page to returning
+  //Automatic return timer, prompts user interaction to stop; doesn't move at all when already at base
+  console.log("Timer on");
+  let count = 0;
+  let timer = setInterval(function() {
+    if (count == 3) {
+      fetch(IP_V4 + '/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: "d3_414a1"}).then((response) => {
+        if (response.status == 200) {
           document.location.href = IP_V4 + "/returningScreen";
         }
-        count++;
-        console.log("15 seconds have elapsed");
-        console.log(count);
-        if (count == 2) {
-          //reset count to 0 if warning is acknowledged
-          swal("Are you still there? Click anywhere on the screen to stop Bender from navigating home.", "", "warning").then((value) => {
-            count = 0;
-          });
+        else {
+          console.log(response);
+          console.log("Return failed to send. An error occurred");
         }
-      }, 15000);
+      });
     }
-    else {
-      console.log("Timer is NOT on");
+    count++;
+    console.log("15 seconds have elapsed");
+    console.log(count);
+    if (count == 2) {
+      //Reset count to 0 if warning is acknowledged
+      swal("Are you still there? Click anywhere on the screen to stop Bender from navigating home.", "", "warning").then((value) => {
+        count = 0;
+      });
     }
-  });
+  }, 30000);
 }
 
+//Determines which room/door the user wants to go to
 function processRequest(event) {
   event.preventDefault();
   let submittedNumber = document.getElementById('roomNumberSubmission').value.replace('.', '_');
   doorCode = `d${submittedNumber}`;
-  //currently only sends user to first door found; in future, provide choice of doors?
   let doorIndex = DOOR_LIST.indexOf(doorCode);
 
   if (doorIndex === -1) {
@@ -57,14 +54,13 @@ function processRequest(event) {
       //index 0 = 414, index 1 = 710
       else {
         document.getElementById("chooseDoors").style.visibility = "visible";
-        //make other things unclickable? hmm
       }
     }
     else {
       validInput = false;
+      //Give user feedback for erroneous choice
       document.getElementById("roomNumberSubmission").style.border = "1.5px red dotted";
       document.getElementById("errorText").style.visibility = "visible";
-      //reset input box
       document.getElementById("roomNumberSubmission").value = "";
     }
   }
@@ -73,6 +69,7 @@ function processRequest(event) {
   }
 }
 
+//Given a user's choice of door, prepare the complete door number for the HTTP request
 function processDoorChoice(event) {
   event.preventDefault();
   let doorChoice = document.getElementById("doorSelect").value;
@@ -81,14 +78,14 @@ function processDoorChoice(event) {
   sendRequest();
 }
 
+//Make the relevant HTTP request to the ROS client to being movement
 function sendRequest() {
-  fetch(IP_V4 + '/userCurrentLocation', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
+  fetch(IP_V4 + '/sendRoomNumber', {method: "POST", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: doorCode}).then((response) => {
     if (response.status == 200) {
       console.log("Room number of user's current location successfully sent");
       document.getElementById("roomNumberSubmission").style.border = "1.5px green dotted";
       document.getElementById("roomNumberSubmission").value = "";
       console.log(doorCode);
-      // alert("Request successfully sent! Robot is coming to you, please wait...");
       swal("Request successfully sent! Robot is now navigating...", "", "success").then((value) => {
         document.location.href = IP_V4 + "/loadingScreen";
       });
@@ -100,6 +97,7 @@ function sendRequest() {
   });
 }
 
+//When the user changes their room number input, hide error messages
 function changedInput() {
   if (!validInput) {
     validInput = true;
@@ -108,8 +106,9 @@ function changedInput() {
   }
 }
 
+//Transfers view to Events page
 function transferViews() {
-  document.location.href = IP_V4 + "/eventSelector";
+  document.location.href = IP_V4 + '/eventSelector';
 }
 
 //List of acceptable doors for BWI_KR navigation was obtained from https://github.com/utexas-bwi/bwi_common/blob/master/bwi_kr_execution/domain/navigation_facts.asp
