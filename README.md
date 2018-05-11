@@ -1,8 +1,8 @@
 # robot-navigation
 <h2 align="center">Using Web Data to Enhance Robot Navigation for GDC Event Attendees
-<h4 align="center">FRI I Project
+<h4 align="center">FRI I Project <br><br>
 
-Front end web application interface to reduce the technological barrier impeding the widespread use of the BWIbots' navigational capabilities.
+<h5 align="center">Front end web application interface to reduce the technological barrier impeding the widespread use of the BWIbots' navigational capabilities.
 
 ## How To Use
 
