@@ -2,7 +2,7 @@
 <h2 align="center">Using Web Data to Enhance Robot Navigation for GDC Event Attendees
 <h4 align="center">FRI I Project
 
-Front end web application interface to enhance the ease of navigation provided by the BWIbots.
+Front end web application interface to reduce the technological barrier impeding the widespread use of the BWIbots' navigational capabilities.
 
 ## How To Use
 
@@ -25,16 +25,16 @@ $ npm start
 ## Key Features
 
 * Simple and elegant user interface
-* User feedback (Loading Screens, Return Screens, Notifications)
+* Feedback to user interactions (Loading Screens, Return Screens, Notifications)
 * Multiple options for navigation
   - Direct navigation by room number
   - Navigation by event selection
 
 ## Interface in Action
 
-![Main Events Page](https://raw.githubusercontent.com/Oceanwall/viewReddit/master/public/images/EventsPage.jpg) <br>
-![Direct Navigation](https://raw.githubusercontent.com/Oceanwall/viewReddit/master/public/images/DirectNavigator.jpg) <br>
-![Loading Screen](https://raw.githubusercontent.com/Oceanwall/viewReddit/master/public/images/LoadingScreen.jpg) <br> <br>
+![Main Events Page](https://raw.githubusercontent.com/avinashdamania/robot-navigation/master/public/images/EventsPage.jpg) <br>
+![Direct Navigation](https://raw.githubusercontent.com/avinashdamania/robot-navigation/master/public/images/DirectNavigator.jpg) <br>
+![Loading Screen](https://raw.githubusercontent.com/avinashdamania/robot-navigation/master/public/images/LoadingScreen.jpg) <br> <br>
 **Click the images below to access YouTube clips demoing the features of this project.** <br> <br>
-[![demo1](https://raw.githubusercontent.com/Oceanwall/viewReddit/master/public/images/RobotMoving.jpg)](https://www.youtube.com/watch?v=SpZ5ktSqrMs) <br> <br>
-[![demo2](https://raw.githubusercontent.com/Oceanwall/viewReddit/master/public/images/ReturnScreen.jpg)](https://www.youtube.com/watch?v=D1TNTfiMRQg) <br> <br>
+[![demo1](https://raw.githubusercontent.com/avinashdamania/robot-navigation/master/public/images/RobotMoving.jpg)](https://www.youtube.com/watch?v=SpZ5ktSqrMs) <br> <br>
+[![demo2](https://raw.githubusercontent.com/avinashdamania/robot-navigation/master/public/images/ReturnScreen.jpg)](https://www.youtube.com/watch?v=D1TNTfiMRQg) <br> <br>
